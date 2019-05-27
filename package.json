@@ -12,26 +12,43 @@
 		"vscode": "^1.32.0"
 	},
 	"activationEvents": [
-		"onCommand:extension.apply"
+		"onCommand:extension.apply",
+		"onCommand:extension.delete"
 	],
 	"contributes": {
 		"commands": [
 			{
 				"command": "extension.apply",
-				"title": "k8s apply"
+        "title": "k8s: Apply"
+			},
+			{
+				"command": "extension.delete",
+        "title": "k8s: Delete"
 			}
 		],
 		"menus": {
 			"editor/context": [
 				{
 					"command": "extension.apply",
-					"group": "YourGroup@1"
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+				},
+				{
+					"command": "extension.delete",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
 				}
 			],
 			"explorer/context": [
 				{
 					"command": "extension.apply",
-					"group": "YourGroup@1"
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+				},
+				{
+					"command": "extension.delete",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
 				}
 			]
 		}
