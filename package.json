@@ -6,7 +6,12 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
-	"author": "Filip Johansson",
+  "author": "Filip Johansson",
+  "publisher": "filip-ph-johansson",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/filip-ph-johansson/k8s-apply-vscode-extension"
+  },
 	"license": "MIT",
 	"engines": {
 		"vscode": "^1.32.0"
@@ -53,7 +58,7 @@
 			]
 		}
 	},
-	"dependencies": {
+	"devDependencies": {
 		"vscode": "^1.1.34"
 	}
 }
