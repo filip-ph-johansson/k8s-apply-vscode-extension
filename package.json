@@ -1,0 +1,42 @@
+{
+	"name": "k8s-apply-vscode-extension",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Filip Johansson",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.32.0"
+	},
+	"activationEvents": [
+		"onCommand:extension.apply"
+	],
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.apply",
+				"title": "k8s apply"
+			}
+		],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "extension.apply",
+					"group": "YourGroup@1"
+				}
+			],
+			"explorer/context": [
+				{
+					"command": "extension.apply",
+					"group": "YourGroup@1"
+				}
+			]
+		}
+	},
+	"dependencies": {
+		"vscode": "^1.1.34"
+	}
+}
