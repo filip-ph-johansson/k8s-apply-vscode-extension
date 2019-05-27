@@ -1,18 +1,12 @@
 const vscode = require('vscode');
+const { applyCommand } = require('./commands');
 
 const activate = (context) => {
-  const applyCommand = vscode.commands.registerCommand('extension.apply', (stuff) => {
-    console.log(stuff);
+  const apply = vscode.commands.registerCommand('extension.apply', applyCommand);
 
-		vscode.window.showInformationMessage(stuff);
-  });
-
-  context.subscriptions.push(applyCommand);
+  context.subscriptions.push(apply);
 };
 
-const deactivate = () => {};
-
 module.exports = {
-  activate,
-  deactivate
+  activate
 };
