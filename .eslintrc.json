@@ -1,0 +1,44 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "array-bracket-spacing": ["error", "never"],
+        "block-scoped-var": "error",
+        "brace-style": ["error", "1tbs"],
+        "camelcase": "warn",
+        "computed-property-spacing": ["error", "never"],
+        "constructor-super": "error",
+        "curly": "error",
+        "comma-dangle": ["error", "never"],
+        "eol-last": "error",
+        "eqeqeq": ["error", "smart"],
+        "keyword-spacing": ["error", { "before": true, "after": true }],
+        "max-depth": ["error", 3],
+        "max-len": ["warn", 120],
+        "max-statements": ["error", 15],
+        "no-const-assign": "error",
+        "no-extend-native": "error",
+        "no-mixed-spaces-and-tabs": "error",
+        "no-this-before-super": "error",
+        "no-trailing-spaces": "error",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "no-use-before-define": ["error", "nofunc"],
+        "object-curly-spacing": ["error", "always"],
+        "prefer-template": "error",
+        "quotes": ["error", "single", "avoid-escape"],
+        "semi": ["error", "always"],
+        "space-unary-ops": "error",
+        "valid-typeof": ["error", { "requireStringLiterals": true }]
+    }
+}

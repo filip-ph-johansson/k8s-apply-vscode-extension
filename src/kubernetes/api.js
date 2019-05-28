@@ -11,7 +11,7 @@ const kubectl = (method, args) => {
     vscode.window.showInformationMessage(`Running command: ${command}`);
 
     exec(command, (error, stdout, stderr) => {
-      if(error || stderr) {
+      if (error || stderr) {
         reject(error || stderr);
       };
 
@@ -22,15 +22,19 @@ const kubectl = (method, args) => {
 
 const applyFromFile = async (filePath, args = []) => {
   return await kubectl('apply', ['-f', filePath, ...args])
-    .catch(error => { throw error });
+    .catch(error => {
+      throw error;
+    });
 };
 
 const deleteFromFile = async (filePath,  args = []) => {
   return await kubectl('delete', ['-f', filePath, ...args])
-    .catch(error => { throw error });
+    .catch(error => {
+      throw error;
+    });
 };
 
 module.exports = {
   applyFromFile,
   deleteFromFile
-}
+};
