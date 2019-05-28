@@ -20,35 +20,17 @@ const kubectl = (method, args) => {
   });
 };
 
-const applyFromFile = async (filePath, args = []) => {
-  return await kubectl('apply', ['-f', filePath, ...args])
-    .catch(error => {
-      throw error;
-    });
-};
+const applyFromFile = (filePath, args = []) =>
+  kubectl('apply', ['-f', filePath, ...args]);
 
-const deleteFromFile = async (filePath,  args = []) => {
-  return await kubectl('delete', ['-f', filePath, ...args])
-    .catch(error => {
-      throw error;
-    });
-};
+const deleteFromFile = (filePath,  args = []) =>
+  kubectl('delete', ['-f', filePath, ...args]);
 
-const getFromFile = async (filePath, args = []) => {
-  return await kubectl('get', ['-f', filePath, ...args, '-o', 'yaml'])
-    .catch(error => {
-      throw error;
-    });
-};
+const getFromFile = (filePath, args = []) =>
+  kubectl('get', ['-f', filePath, ...args, '-o', 'yaml']);
 
-const describeFromFile = async (filePath, args = []) => {
-  return await kubectl('describe', ['-f', filePath, ...args])
-    .catch(error => {
-      throw error;
-    });
-};
-
-//TODO: refactor the shit out of this file. DRY
+const describeFromFile = (filePath, args = []) =>
+  kubectl('describe', ['-f', filePath, ...args]);
 
 module.exports = {
   applyFromFile,
