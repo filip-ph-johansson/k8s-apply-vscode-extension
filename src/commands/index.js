@@ -7,11 +7,12 @@ const commandHandler = (k8sFunc, outputChannel) => async context => {
     const result = await k8sFunc(context.path);
 
     vscode.window.showInformationMessage(result);
-    outputChannel.append(result);
-    console.log(result);
+    outputChannel.append(`${result} \n`);
   } catch (error) {
-    vscode.window.showErrorMessage(error.message);
-    console.error(error.message);
+    const { message } = error;
+
+    vscode.window.showErrorMessage(message);
+    outputChannel.append(`${error} \n`);
   }
 };
 
