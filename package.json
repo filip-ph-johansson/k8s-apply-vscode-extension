@@ -8,7 +8,7 @@
     "lint": "eslint ."
   },
   "author": "Filip Johansson",
-  "publisher": "filip-ph-johansson",
+  "publisher": "Filip Johansson",
   "repository": {
     "type": "git",
     "url": "https://github.com/filip-ph-johansson/k8s-apply-vscode-extension"
@@ -19,17 +19,27 @@
   },
   "activationEvents": [
     "onCommand:extension.apply",
-    "onCommand:extension.delete"
+    "onCommand:extension.delete",
+    "onCommand:extension.get",
+    "onCommand:extension.describe"
   ],
   "contributes": {
     "commands": [
       {
         "command": "extension.apply",
-        "title": "k8s: Apply"
+        "title": "Lazy k8s: Apply"
       },
       {
         "command": "extension.delete",
-        "title": "k8s: Delete"
+        "title": "Lazy k8s: Delete"
+      },
+      {
+        "command": "extension.get",
+        "title": "Lazy k8s: Get yaml"
+      },
+      {
+        "command": "extension.describe",
+        "title": "Lazy k8s: Describe"
       }
     ],
     "menus": {
@@ -43,6 +53,16 @@
           "command": "extension.delete",
           "group": "YourGroup@1",
           "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.get",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.describe",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
         }
       ],
       "explorer/context": [
@@ -53,6 +73,16 @@
         },
         {
           "command": "extension.delete",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.get",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.describe",
           "group": "YourGroup@1",
           "when": "resourceLangId == yaml"
         }

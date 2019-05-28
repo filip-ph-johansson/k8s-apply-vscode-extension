@@ -34,7 +34,25 @@ const deleteFromFile = async (filePath,  args = []) => {
     });
 };
 
+const getFromFile = async (filePath, args = []) => {
+  return await kubectl('get', ['-f', filePath, ...args, '-o', 'yaml'])
+    .catch(error => {
+      throw error;
+    });
+};
+
+const describeFromFile = async (filePath, args = []) => {
+  return await kubectl('describe', ['-f', filePath, ...args])
+    .catch(error => {
+      throw error;
+    });
+};
+
+//TODO: refactor the shit out of this file. DRY
+
 module.exports = {
   applyFromFile,
-  deleteFromFile
+  deleteFromFile,
+  getFromFile,
+  describeFromFile
 };
