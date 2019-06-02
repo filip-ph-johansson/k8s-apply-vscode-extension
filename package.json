@@ -21,7 +21,11 @@
     "onCommand:extension.apply",
     "onCommand:extension.delete",
     "onCommand:extension.get",
-    "onCommand:extension.describe"
+    "onCommand:extension.describe",
+    "onCommand:extension.applyWithContext",
+    "onCommand:extension.deleteWithContext",
+    "onCommand:extension.getWithContext",
+    "onCommand:extension.describeWithContext"
   ],
   "contributes": {
     "commands": [
@@ -40,6 +44,22 @@
       {
         "command": "extension.describe",
         "title": "Lazy k8s: Describe"
+      },
+      {
+        "command": "extension.applyWithContext",
+        "title": "Lazy k8s: Apply with context"
+      },
+      {
+        "command": "extension.deleteWithContext",
+        "title": "Lazy k8s: Delete with context"
+      },
+      {
+        "command": "extension.getWithContext",
+        "title": "Lazy k8s: Get yaml with context"
+      },
+      {
+        "command": "extension.describeWithContext",
+        "title": "Lazy k8s: Describe with context"
       }
     ],
     "menus": {
@@ -63,6 +83,26 @@
           "command": "extension.describe",
           "group": "YourGroup@1",
           "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.applyWithContext",
+          "group": "YourGroup@2",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.deleteWithContext",
+          "group": "YourGroup@2",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.getWithContext",
+          "group": "YourGroup@2",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.describeWithContext",
+          "group": "YourGroup@2",
+          "when": "resourceLangId == yaml"
         }
       ],
       "explorer/context": [
@@ -83,6 +123,26 @@
         },
         {
           "command": "extension.describe",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.applyWithContext",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.deleteWithContext",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.getWithContext",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.describeWithContext",
           "group": "YourGroup@1",
           "when": "resourceLangId == yaml"
         }

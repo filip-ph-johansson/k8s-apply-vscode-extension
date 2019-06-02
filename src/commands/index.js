@@ -2,28 +2,41 @@ const vscode = require('vscode');
 const k8sApi = require('../kubernetes/api');
 const environment = require('../environment');
 
-const commandHandler = (k8sFunc, outputChannel) => async context => {
+const getK8sContexts = async () => {
+  const k8sContexts = await k8sApi.getContexts();
+  return await vscode.window.showQuickPick(k8sContexts);
+};
+
+const commandHandler = (k8sFunc, output, withContext) => async commandContext => {
   try {
-    const result = await k8sFunc(context.path);
+    const context = withContext && await getK8sContexts() || undefined;
+
+    const result = await k8sFunc(commandContext.path, { context });
 
     vscode.window.showInformationMessage(result);
-    outputChannel.append(`${result} \n`);
+    output(result);
   } catch (error) {
     const { message } = error;
 
     vscode.window.showErrorMessage(message);
-    outputChannel.append(`${error} \n`);
+    output(message);
   }
 };
 
 const createCommands = () => {
   const outputChannel = vscode.window.createOutputChannel(environment.OUTPUT_CHANNEL_NAME);
 
+  const writeToOutput = stringPayload => outputChannel.append(`${stringPayload} \n`);
+
   const commands = {
-    applyCommand: commandHandler(k8sApi.applyFromFile, outputChannel),
-    deleteCommand: commandHandler(k8sApi.deleteFromFile, outputChannel),
-    getCommand: commandHandler(k8sApi.getFromFile, outputChannel),
-    describeCommand: commandHandler(k8sApi.describeFromFile, outputChannel)
+    applyCommand: commandHandler(k8sApi.applyFromFile, writeToOutput),
+    deleteCommand: commandHandler(k8sApi.deleteFromFile, writeToOutput),
+    getCommand: commandHandler(k8sApi.getFromFile, writeToOutput),
+    describeCommand: commandHandler(k8sApi.describeFromFile, writeToOutput),
+    applyWithContextCommand: commandHandler(k8sApi.applyFromFile, writeToOutput, true),
+    deleteWithContextCommand: commandHandler(k8sApi.deleteFromFile, writeToOutput, true),
+    getWithContextCommand: commandHandler(k8sApi.getFromFile, writeToOutput, true),
+    describeWithContextCommand: commandHandler(k8sApi.describeFromFile, writeToOutput, true)
   };
 
   return commands;

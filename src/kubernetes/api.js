@@ -20,21 +20,46 @@ const kubectl = (method, args) => {
   });
 };
 
-const applyFromFile = (filePath, args = []) =>
-  kubectl('apply', ['-f', filePath, ...args]);
+const strategies = {
+  context: value => `--context=${value}`
+};
 
-const deleteFromFile = (filePath,  args = []) =>
-  kubectl('delete', ['-f', filePath, ...args]);
+const optionsToArgs = (options = {}) => {
+  return Object.entries(options).reduce((acc, [key, value]) => {
+    const strategy = strategies[key];
 
-const getFromFile = (filePath, args = []) =>
-  kubectl('get', ['-f', filePath, ...args, '-o', 'yaml']);
+    if (strategy) {
+      acc.push(strategy(value));
+    }
 
-const describeFromFile = (filePath, args = []) =>
-  kubectl('describe', ['-f', filePath, ...args]);
+    return acc;
+  },[]);
+};
+
+const applyFromFile = (filePath, options) =>
+  kubectl('apply', ['-f', filePath, ...optionsToArgs(options)]);
+
+const deleteFromFile = (filePath, options) =>
+  kubectl('delete', ['-f', filePath, ...optionsToArgs(options)]);
+
+const getFromFile = (filePath, options) =>
+  kubectl('get', ['-f', filePath, ...optionsToArgs(options), '-o yaml']);
+
+const describeFromFile = (filePath, options) =>
+  kubectl('describe', ['-f', filePath, ...optionsToArgs(options)]);
+
+const getContexts = async () => {
+  const rawOutput = await kubectl('config', ['get-contexts', '-o name']);
+  return rawOutput
+    .trim()
+    .split('\n')
+    .splice(1);
+};
 
 module.exports = {
   applyFromFile,
   deleteFromFile,
   getFromFile,
-  describeFromFile
+  describeFromFile,
+  getContexts
 };
