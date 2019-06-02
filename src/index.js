@@ -1,4 +1,8 @@
-const vscode = require('vscode');
+const {
+  commands: {
+    registerCommand
+  }
+} = require('vscode');
 const {
   applyCommand,
   deleteCommand,
@@ -12,14 +16,14 @@ const {
 
 const activate = (context) => {
   context.subscriptions.push(
-    vscode.commands.registerCommand('extension.apply', applyCommand),
-    vscode.commands.registerCommand('extension.delete', deleteCommand),
-    vscode.commands.registerCommand('extension.get', getCommand),
-    vscode.commands.registerCommand('extension.describe', describeCommand),
-    vscode.commands.registerCommand('extension.applyWithContext', applyWithContextCommand),
-    vscode.commands.registerCommand('extension.deleteWithContext', deleteWithContextCommand),
-    vscode.commands.registerCommand('extension.getWithContext', getWithContextCommand),
-    vscode.commands.registerCommand('extension.describeWithContext', describeWithContextCommand)
+    registerCommand('extension.apply', applyCommand),
+    registerCommand('extension.delete', deleteCommand),
+    registerCommand('extension.get', getCommand),
+    registerCommand('extension.describe', describeCommand),
+    registerCommand('extension.applyWithContext', applyWithContextCommand),
+    registerCommand('extension.deleteWithContext', deleteWithContextCommand),
+    registerCommand('extension.getWithContext', getWithContextCommand),
+    registerCommand('extension.describeWithContext', describeWithContextCommand)
   );
 };
 
