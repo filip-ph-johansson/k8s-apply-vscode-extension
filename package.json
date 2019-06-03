@@ -1,7 +1,11 @@
 {
-  "name": "k8s-apply-vscode-extension",
+  "name": "lazy-k8s",
+  "displayName": "Lazy k8s",
   "version": "1.0.0",
-  "description": "",
+  "description": "Apply, Delete, Describe and Get Kubernetes resource definitions with the click of a button",
+  "categories": [
+    "Other"
+  ],
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +13,20 @@
   },
   "author": "Filip Johansson",
   "publisher": "Filip Johansson",
+  "icon": "icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/filip-ph-johansson/k8s-apply-vscode-extension"
   },
   "license": "MIT",
   "engines": {
-    "vscode": "^1.32.0"
+    "vscode": "^1.13.0"
   },
+  "keywords": [
+    "kubernetes",
+    "k8s",
+    "kubectl"
+  ],
   "activationEvents": [
     "onCommand:extension.apply",
     "onCommand:extension.delete",
