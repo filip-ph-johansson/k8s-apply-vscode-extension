@@ -14,6 +14,8 @@ const commandHandler = (k8sFunc, output, withContext) => async commandContext =>
 
     if (context) {
       options.context = context;
+    } else if (withContext) {
+      return;
     }
 
     const result = await k8sFunc(commandContext.path, options);
