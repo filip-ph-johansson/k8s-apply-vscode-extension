@@ -9,9 +9,14 @@ const getK8sContexts = async () => {
 
 const commandHandler = (k8sFunc, output, withContext) => async commandContext => {
   try {
-    const context = withContext && await getK8sContexts() || undefined;
+    const options = {};
+    const context = withContext && await getK8sContexts();
 
-    const result = await k8sFunc(commandContext.path, { context });
+    if (context) {
+      options.context = context;
+    }
+
+    const result = await k8sFunc(commandContext.path, options);
 
     vscode.window.showInformationMessage(result);
     output(result);
