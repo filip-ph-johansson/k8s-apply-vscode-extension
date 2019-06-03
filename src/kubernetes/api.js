@@ -52,8 +52,7 @@ const getContexts = async () => {
   const rawOutput = await kubectl('config', ['get-contexts', '-o name']);
   return rawOutput
     .trim()
-    .split('\n')
-    .splice(1);
+    .split('\n');
 };
 
 module.exports = {
