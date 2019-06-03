@@ -1,7 +1,7 @@
 {
   "name": "lazy-k8s",
   "displayName": "Lazy k8s",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Apply, Delete, Describe and Get Kubernetes resource definitions with the click of a button",
   "categories": [
     "Other"

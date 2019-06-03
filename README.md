@@ -19,6 +19,10 @@ Kubernetes output and errors will be available in the VS Code output panel by se
 
 ## Release Notes
 
+### 1.0.1
+
+Remove hyphen in the README title
+
 ### 1.0.0
 
 Initial release of the extension.
