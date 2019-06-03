@@ -12,7 +12,7 @@
     "lint": "eslint ."
   },
   "author": "Filip Johansson",
-  "publisher": "Filip Johansson",
+  "publisher": "filip-ph-johansson",
   "icon": "icon.png",
   "repository": {
     "type": "git",
