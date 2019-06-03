@@ -1,6 +1,6 @@
 # Lazy-k8s
 
-This extension allows you to run Apply, Delete, Describe and Get operations on your Kubernetes yaml resource definitions with the click of a button.
+This extension allows you to run **Apply**, **Delete**, **Describe** and **Get** operations on your Kubernetes yaml resource definitions with the click of a button.
 
 ## Requirements
 - [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) installed
