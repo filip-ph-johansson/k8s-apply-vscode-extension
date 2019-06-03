@@ -18,7 +18,7 @@ const commandHandler = (k8sFunc, output, withContext) => async commandContext =>
       return;
     }
 
-    const result = await k8sFunc(commandContext.path, options);
+    const result = await k8sFunc(commandContext.path, options, output);
 
     vscode.window.showInformationMessage(result);
     output(result);

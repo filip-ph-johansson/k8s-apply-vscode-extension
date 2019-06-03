@@ -1,14 +1,13 @@
 const { exec } = require('child_process');
-const vscode = require('vscode');
 
 const k8sArgsToString = args => args.join(' ');
 
-const kubectl = (method, args) => {
+const kubectl = (method, args, output) => {
   return new Promise((resolve, reject) => {
     const formattedArgs = k8sArgsToString(args);
     const command = `kubectl ${method} ${formattedArgs}`;
 
-    vscode.window.showInformationMessage(`Running command: ${command}`);
+    output && output(command);
 
     exec(command, (error, stdout, stderr) => {
       if (error || stderr) {
@@ -36,17 +35,17 @@ const optionsToArgs = (options = {}) => {
   },[]);
 };
 
-const applyFromFile = (filePath, options) =>
-  kubectl('apply', ['-f', filePath, ...optionsToArgs(options)]);
+const applyFromFile = (filePath, options, output) =>
+  kubectl('apply', ['-f', filePath, ...optionsToArgs(options)], output);
 
-const deleteFromFile = (filePath, options) =>
-  kubectl('delete', ['-f', filePath, ...optionsToArgs(options)]);
+const deleteFromFile = (filePath, options, output) =>
+  kubectl('delete', ['-f', filePath, ...optionsToArgs(options)], output);
 
-const getFromFile = (filePath, options) =>
-  kubectl('get', ['-f', filePath, ...optionsToArgs(options), '-o yaml']);
+const getFromFile = (filePath, options, output) =>
+  kubectl('get', ['-f', filePath, ...optionsToArgs(options), '-o yaml'], output);
 
-const describeFromFile = (filePath, options) =>
-  kubectl('describe', ['-f', filePath, ...optionsToArgs(options)]);
+const describeFromFile = (filePath, options, output) =>
+  kubectl('describe', ['-f', filePath, ...optionsToArgs(options)], output);
 
 const getContexts = async () => {
   const rawOutput = await kubectl('config', ['get-contexts', '-o name']);
