@@ -9,7 +9,7 @@ This extension allows you to run **Apply**, **Delete**, **Describe** and **Get**
 
 Right-click any .yaml-file in the explorer side bar or in the file editor and select which operation you want to perform. If no context is provided Kubectl default context will be used.
 
-To specify which context to use select **..with context** after right-clicking a definition. This will open a quick select menu with the available contexts.
+To specify which context to use while running the command select **..with context** after right-clicking a definition. This will open a quick select menu with the available contexts.
 
 ## Output
 Kubernetes output and errors will be available in the VS Code output panel by selecting `Lazy k8s` in the dropdown-menu.
@@ -18,6 +18,10 @@ Kubernetes output and errors will be available in the VS Code output panel by se
 
 
 ## Release Notes
+
+### 1.1.1
+
+Add ability to set kubectl default context (`kubectl config use-context`)
 
 ### 1.0.1
 
