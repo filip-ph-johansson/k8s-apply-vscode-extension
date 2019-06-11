@@ -11,7 +11,8 @@ const {
   applyWithContextCommand,
   deleteWithContextCommand,
   getWithContextCommand,
-  describeWithContextCommand
+  describeWithContextCommand,
+  selectContext
 } = require('./commands');
 
 const activate = (context) => {
@@ -23,7 +24,8 @@ const activate = (context) => {
     registerCommand('extension.applyWithContext', applyWithContextCommand),
     registerCommand('extension.deleteWithContext', deleteWithContextCommand),
     registerCommand('extension.getWithContext', getWithContextCommand),
-    registerCommand('extension.describeWithContext', describeWithContextCommand)
+    registerCommand('extension.describeWithContext', describeWithContextCommand),
+    registerCommand('extension.selectContext', selectContext)
   );
 };
 

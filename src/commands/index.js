@@ -4,7 +4,13 @@ const environment = require('../environment');
 
 const getK8sContexts = async () => {
   const k8sContexts = await k8sApi.getContexts();
-  return await vscode.window.showQuickPick(k8sContexts);
+  const selectedContext = await vscode.window.showQuickPick(k8sContexts
+    .map(context => ({
+      description: context.isCurrent && 'current' || '',
+      label: context.context
+    })));
+
+  return selectedContext && selectedContext.label || null;
 };
 
 const commandHandler = (k8sFunc, output, withContext) => async commandContext => {
@@ -30,6 +36,26 @@ const commandHandler = (k8sFunc, output, withContext) => async commandContext =>
   }
 };
 
+const selectContext = output => async () => {
+  try {
+    const context = await getK8sContexts();
+
+    if (!context) {
+      return;
+    }
+
+    const result = await k8sApi.useContext(context, output);
+
+    vscode.window.showInformationMessage(result);
+    output(result);
+  } catch (error) {
+    const { message } = error;
+
+    vscode.window.showErrorMessage(message);
+    output(message);
+  }
+};
+
 const createCommands = () => {
   const outputChannel = vscode.window.createOutputChannel(environment.OUTPUT_CHANNEL_NAME);
 
@@ -43,7 +69,8 @@ const createCommands = () => {
     applyWithContextCommand: commandHandler(k8sApi.applyFromFile, writeToOutput, true),
     deleteWithContextCommand: commandHandler(k8sApi.deleteFromFile, writeToOutput, true),
     getWithContextCommand: commandHandler(k8sApi.getFromFile, writeToOutput, true),
-    describeWithContextCommand: commandHandler(k8sApi.describeFromFile, writeToOutput, true)
+    describeWithContextCommand: commandHandler(k8sApi.describeFromFile, writeToOutput, true),
+    selectContext: selectContext(writeToOutput)
   };
 
   return commands;

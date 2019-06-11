@@ -35,7 +35,8 @@
     "onCommand:extension.applyWithContext",
     "onCommand:extension.deleteWithContext",
     "onCommand:extension.getWithContext",
-    "onCommand:extension.describeWithContext"
+    "onCommand:extension.describeWithContext",
+    "onCommand:extension.selectContext"
   ],
   "contributes": {
     "commands": [
@@ -70,6 +71,10 @@
       {
         "command": "extension.describeWithContext",
         "title": "Lazy k8s: Describe with context"
+      },
+      {
+        "command": "extension.selectContext",
+        "title": "Lazy k8s: Set context"
       }
     ],
     "menus": {
@@ -113,6 +118,11 @@
           "command": "extension.describeWithContext",
           "group": "YourGroup@2",
           "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.selectContext",
+          "group": "YourGroup@2",
+          "when": "resourceLangId == yaml"
         }
       ],
       "explorer/context": [
@@ -153,6 +163,11 @@
         },
         {
           "command": "extension.describeWithContext",
+          "group": "YourGroup@1",
+          "when": "resourceLangId == yaml"
+        },
+        {
+          "command": "extension.selectContext",
           "group": "YourGroup@1",
           "when": "resourceLangId == yaml"
         }

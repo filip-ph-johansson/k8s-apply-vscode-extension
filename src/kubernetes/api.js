@@ -14,7 +14,7 @@ const kubectl = (method, args, output) => {
         reject(error || stderr);
       };
 
-      resolve(stdout);
+      resolve(stdout.trim());
     });
   });
 };
@@ -47,17 +47,30 @@ const getFromFile = (filePath, options, output) =>
 const describeFromFile = (filePath, options, output) =>
   kubectl('describe', ['-f', filePath, ...optionsToArgs(options)], output);
 
+const getCurrentContext = async () => {
+  return await kubectl('config', ['current-context']);
+};
+
 const getContexts = async () => {
   const rawOutput = await kubectl('config', ['get-contexts', '-o name']);
+  const currentContext = await getCurrentContext();
+
   return rawOutput
-    .trim()
-    .split('\n');
+    .split('\n')
+    .map(context => ({
+      context,
+      isCurrent: context === currentContext
+    }));
 };
+
+const useContext = async (context, output) =>
+  kubectl('config', ['use-context', context], output);
 
 module.exports = {
   applyFromFile,
   deleteFromFile,
   getFromFile,
   describeFromFile,
-  getContexts
+  getContexts,
+  useContext
 };
