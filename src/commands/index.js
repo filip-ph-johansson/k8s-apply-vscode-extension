@@ -13,8 +13,22 @@ const getK8sContexts = async () => {
   return selectedContext && selectedContext.label || null;
 };
 
-const commandHandler = (k8sFunc, output, withContext) => async commandContext => {
+const loggerWrapper = async (action, output) => {
   try {
+    const result = await action();
+
+    vscode.window.showInformationMessage(result);
+    result && output(result);
+  } catch (error) {
+    const { message } = error;
+
+    vscode.window.showErrorMessage(message);
+    output(message);
+  }
+};
+
+const commandHandler = (k8sFunc, output, withContext) => async commandContext => {
+  loggerWrapper(async () => {
     const options = {};
     const context = withContext && await getK8sContexts();
 
@@ -24,36 +38,20 @@ const commandHandler = (k8sFunc, output, withContext) => async commandContext =>
       return;
     }
 
-    const result = await k8sFunc(commandContext.path, options, output);
-
-    vscode.window.showInformationMessage(result);
-    output(result);
-  } catch (error) {
-    const { message } = error;
-
-    vscode.window.showErrorMessage(message);
-    output(message);
-  }
+    return await k8sFunc(commandContext.path, options, output);
+  }, output);
 };
 
 const selectContext = output => async () => {
-  try {
+  loggerWrapper(async () => {
     const context = await getK8sContexts();
 
     if (!context) {
       return;
     }
 
-    const result = await k8sApi.useContext(context, output);
-
-    vscode.window.showInformationMessage(result);
-    output(result);
-  } catch (error) {
-    const { message } = error;
-
-    vscode.window.showErrorMessage(message);
-    output(message);
-  }
+    return await k8sApi.useContext(context, output);
+  }, output);
 };
 
 const createCommands = () => {
